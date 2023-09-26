@@ -1,0 +1,21 @@
+empy
+numpy 
+# torch
+# torchvision 
+scipy 
+cython   
+astropy          
+pybind11         
+setuptools  
+extension_helpers 
+rospkg  
+catkin_pkg   
+matplotlib      
+scikit-learn      
+scikit-image   
+opencv-python
+pillow
+pyyaml
+open3d  
+seaborn 
+demangler
