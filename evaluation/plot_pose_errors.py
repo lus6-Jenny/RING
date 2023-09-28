@@ -8,6 +8,7 @@ import matplotlib
 matplotlib.rcParams.update({'font.size': 16})
 matplotlib.rcParams.update({'font.weight': "bold"})
 matplotlib.rcParams.update({'axes.labelweight': "bold"})
+matplotlib.rcParams.update({'axes.titleweight': "bold"})
 
 
 # plot cdf
@@ -19,6 +20,7 @@ def plot_cdf(errors, save_path, xlabel, ylabel, title):
     plt.ylabel(ylabel)
     plt.title(title)
     plt.savefig(save_path)
+    # plt.show()
     plt.close()
 
 

@@ -1,7 +1,5 @@
 import os
 import sys
-# sys.path.append("./vox_utils")
-
 import cv2
 import time
 import torch

@@ -1,7 +1,6 @@
 import argparse
 import matplotlib
 import matplotlib.pyplot as plt
-matplotlib.use("Agg")
 matplotlib.rcParams.update({'font.size': 14})
 matplotlib.rcParams.update({'font.weight': "bold"})
 matplotlib.rcParams.update({'axes.labelweight': "bold"})
@@ -68,7 +67,7 @@ def compute_PR_pairs(pair_dists, query_positions, map_positions, thresholds, sav
     plt.ylabel("Precision [%]")
     plt.xticks([0, 0.2, 0.4, 0.6, 0.8, 1.0], ["0", "20", "40", "60", "80", "100"])
     plt.yticks([0, 0.2, 0.4, 0.6, 0.8, 1.0], ["0", "20", "40", "60", "80", "100"])
-    plt.show()
+    # plt.show()
     fig.savefig(save_path, bbox_inches='tight', pad_inches=0)
     plt.close()
     return precisions, recalls, f1s

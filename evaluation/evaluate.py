@@ -1,26 +1,26 @@
 import os
 import time
 import torch
-import pickle
 import argparse
 import numpy as np
 from tqdm import tqdm
 from typing import List, Dict
-import matplotlib.pyplot as plt
 from sklearn.neighbors import KDTree
+
+from utils.core import *
+import utils.config as cfg
+from utils.tools import imshow
+from utils.poses import relative_pose, xyz_ypr2m, m2xyz_ypr, angle_clip, cal_pose_error
+from utils.point_clouds import o3d_icp, fast_gicp, draw_pc, draw_pc_pair, draw_registration_result
 
 from datasets.NCLTDataset import NCLTPointCloudLoader
 from datasets.KITTIDataset import KITTIPointCloudLoader
 from datasets.MulRanDataset import MulRanPointCloudLoader
 from datasets.OxfordRadarDataset import OxfordRadarPointCloudLoader
-from evaluation.generate_evaluation_sets import EvaluationSet, EvaluationTuple
-from evaluation.plot_PR_curve import compute_AP, compute_AUC, compute_PR_pairs
-from evaluation.plot_pose_errors import plot_cdf
 
-from utils.core import *
-import utils.config as cfg
-from utils.poses import relative_pose, xyz_ypr2m, m2xyz_ypr, angle_clip, cal_pose_error
-from utils.point_clouds import o3d_icp, fast_gicp, draw_pc, draw_pc_pair, draw_registration_result
+from evaluation.plot_pose_errors import plot_cdf
+from evaluation.plot_PR_curve import compute_PR_pairs
+from evaluation.generate_evaluation_sets import EvaluationSet, EvaluationTuple
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -141,8 +141,7 @@ def evaluate(dataset, eval_set_filepath: str, revisit_thresholds: List[float] = 
                 angles = np.concatenate((angles, batch_angles), axis=-1)
 
         dists = dists.squeeze()
-        angles = angles.squeeze()    
-        print("---debug---", np.min(dists), np.max(dists))        
+        angles = angles.squeeze()          
         pair_dists[query_ndx] = dists
         dists_sorted = np.sort(dists)
         idxs_sorted = np.argsort(dists)
